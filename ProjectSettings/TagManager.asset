@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Column
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -49,4 +52,7 @@ TagManager:
     locked: 0
   - name: Foreplay
     uniqueID: 2339911013
+    locked: 0
+  - name: Canvas
+    uniqueID: 1870899647
     locked: 0
