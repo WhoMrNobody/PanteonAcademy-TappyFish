@@ -15,6 +15,7 @@ public class Fish : MonoBehaviour
     [SerializeField] Score score;
     [SerializeField] GameManager gameManager;
     [SerializeField] Sprite fishDied;
+    [SerializeField] AudioSource _swim, _hit, _point;
     SpriteRenderer _spriteRenderer;
     Animator _anim;
 
@@ -46,6 +47,8 @@ public class Fish : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {   
+            _swim.Play();
+
             if(GameManager.isGameStarted == false)
             {
                 _rb.gravityScale = 5f;
@@ -88,11 +91,12 @@ public class Fish : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             score.Scored();
-
+            _point.Play();
         }
-        else if (collision.CompareTag("Column"))
+        else if (collision.CompareTag("Column") && GameManager.gameOver == false)
         {
             gameManager.GM_GameOver();
+            FishDieSoundEffect();
         }
     }
 
@@ -104,8 +108,14 @@ public class Fish : MonoBehaviour
             {
                 gameManager.GM_GameOver();
                 GameOver();
+                FishDieSoundEffect();
             } 
         }
+    }
+
+    void FishDieSoundEffect()
+    {
+        _hit.Play();
     }
 
     void GameOver()
@@ -114,5 +124,6 @@ public class Fish : MonoBehaviour
         _spriteRenderer.sprite = fishDied;
         _anim.enabled = false;
         transform.rotation = Quaternion.Euler(0, 0, -90);
+        
     }
 }
