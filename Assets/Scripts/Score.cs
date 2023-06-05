@@ -24,12 +24,6 @@ public class Score : MonoBehaviour
         _panelHighScore.text = _highScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Scored()
     {
         _score++;
@@ -40,6 +34,7 @@ public class Score : MonoBehaviour
         {
             _highScore= _score;
             _panelHighScore.text = _highScore.ToString();
+            _panelScore.text = _score.ToString();
             PlayerPrefs.SetInt("highscore", _highScore);
             _newRecord.SetActive(true);
         }
